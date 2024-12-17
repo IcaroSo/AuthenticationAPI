@@ -13,10 +13,8 @@ namespace AuthenticationAPI.Controllers
 
         public LoginController(AuthDatabaseContext context)
         {
-            _databaseContext = context ?? throw new ArgumentNullException(nameof(context)); // Verifica se o DbContext foi passado corretamente
+            _databaseContext = context ?? throw new ArgumentNullException(nameof(context)); 
         }
-
-
 
         [HttpGet]
         public async Task<IActionResult> loginUser([FromBody] LoginRequest loginRequest)
