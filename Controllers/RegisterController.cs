@@ -1,8 +1,7 @@
-﻿using System;
-using AuthenticationAPI.Models;
-using Microsoft.AspNetCore.Http;
+﻿using AuthenticationAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace AuthenticationAPI.Controllers
 {
@@ -22,17 +21,19 @@ namespace AuthenticationAPI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<IActionResult> registerUser([FromBody] User user)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            // Verificar se o usuário com o mesmo email já existe
             var existingUser = await _databaseContext.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
             if (existingUser != null)
                 return Conflict("User with this email already exists.");
 
-            // Adicionar o novo usuário
+            var passwordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(user.Password);
+
+            user.Password = passwordHash;
+
             _databaseContext.Users.Add(user);
             await _databaseContext.SaveChangesAsync();
 

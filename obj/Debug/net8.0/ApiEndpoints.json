@@ -1,7 +1,23 @@
 [
   {
+    "ContainingType": "AuthenticationAPI.Controllers.LoginController",
+    "Method": "loginUser",
+    "RelativePath": "api/Login",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginRequest",
+        "Type": "AuthenticationAPI.Models.LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AuthenticationAPI.Controllers.RegisterController",
-    "Method": "Register",
+    "Method": "registerUser",
     "RelativePath": "api/Register",
     "HttpMethod": "POST",
     "IsController": true,
